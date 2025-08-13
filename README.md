@@ -1,25 +1,91 @@
-<<<<<<< HEAD
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# HealthCare
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+**HealthCare** is a collaborative seminar project developed with ASP.NET Core (API) and Angular (Frontend). It is a role-based web application designed to streamline healthcare management processes. The system supports multiple user roles (Pacijent, Ljekar, Tehnicar, Admin etc.) with tailored access to different features.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
-=======
-# HealthCare_RS1
-Seminar work - App made for improving the work of health institutions 
->>>>>>> 9fa08e4593e6513fa1e0a924bd580fc7c910c2e9
+## My Contributions
+
+- **Authentication and authorization** – Managing user account access with role assignments
+- **Role "Admin"** – Adding new staff members (Ljekar, Tehnicar, Asistent etc.)
+- **Role "Ljekar"** – Findings and referrals management, requests for medication
+- **Role "Pacijent"** – Findings overview
+- **Role "Farmaceut"** – Medication request management
+  
+
+
+## Tech Stack
+
+- **Backend:** ASP.NET Core Web API  
+- **Frontend:** Angular  
+- **Database:** SQL Server (Code First with Entity Framework)  
+- **Authentication:** Basic Auth + 2FA verification via e-mail  
+- **Version Control:** Git & GitHub
+
+
+
+## Reminder
+
+This project has built-in 2FA verification via e-mail, but that option is turned off due to easier testing of the app. To enable 2FA for a specific user in the database:  
+```bash
+UPDATE dbo.Korisnik -- Table Korisnik
+SET IsEnabled2FA = 1  -- Enable 2FA 
+WHERE UserId = 123; -- Replace 123 with the actual user's ID
+```
+
+
+
+## Running The App
+
+**1. Run the API**
+
+Navigate to the API folder and open the HealthCare.sln solution.
+
+**2. Run Angular frontend**
+
+Open angular folder in Visual Studio Code and install packages:
+```bash
+npm install
+```
+After installing packages, run the app: 
+```bash
+npm start
+```
+
+
+
+## Login Credentials
+
+Role "Admin"
+```bash
+E-mail: admin@test.com
+Password: Pass123$
+```
+Role "Ljekar"
+```bash
+E-mail: ljekar@test.com
+Password: Pass123$
+```
+Role "Pacijent"
+```bash
+E-mail: pacijent@test.com
+Password: Pass123$
+```
+Role "Asistent"
+```bash
+E-mail: asistent@test.com
+Password: Pass123$
+```
+Role "Tehnicar"
+```bash
+E-mail: tehnicar@test.com
+Password: Pass123$
+```
+Role "Farmaceut"
+```bash
+E-mail: farmaceut@test.com
+Password: Pass123$
+```
+
+
+
