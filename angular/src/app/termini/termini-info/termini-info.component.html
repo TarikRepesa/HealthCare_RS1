@@ -1,0 +1,98 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'dodatniOpis' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+
+          <div class="row">
+            <div class="col col-sm-2">
+              <img src="../../../assets/HealthCareIcon1.png" width="80" height="70">
+            </div>
+            <div class="col">
+              <h2
+                style=" color: rgb(29, 117, 184); font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight: bold; padding-top: 23px; margin-left: -20px;">
+                Health Care</h2>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'datumPosjete' | translate}}:</label>
+            </div>
+            <div class="col">
+              <p>{{termin.pocetakPosjete | date:'dd/MM/yyyy'}}</p>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'vrijemePosjete' | translate}}:</label>
+            </div>
+            <div class="col">
+              <p>{{termin.pocetakPosjete | date:'hh:mm a'}} - {{termin.krajPosjete | date:'hh:mm a'}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row mt-4">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'vrstaPregleda' | translate}}:</label>
+            </div>
+            <div class="col">
+              <textarea
+                style="min-height: 120px; width: 100%; background-color: rgba(220, 220, 220, 0.288); padding: 5px;"
+                [value]="termin.vrsta" disabled></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'prioritet' | translate}}:</label>
+            </div>
+            <div class="col">
+              <textarea
+                style="min-height: 120px; width: 100%; background-color: rgba(220, 220, 220, 0.288); padding: 5px;"
+                [value]="termin.prioritet" disabled></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col">
+              <p style="font-weight: 500; font-size: 1.2em;">{{'ambulatna' | translate}}</p>
+            </div>
+            <hr>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'naziv' | translate}}:</label>
+            </div>
+            <div class="col">
+              <p>{{termin.nazivAmbulante}}</p>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col col-sm-4">
+              <label style="font-weight: 500;">{{'ljekar' | translate}}:</label>
+            </div>
+            <div class="col">
+              <p>{{termin.imeLjekara}} {{termin.prezimeLjekara}}</p>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="modal-footer p-2">
+        <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

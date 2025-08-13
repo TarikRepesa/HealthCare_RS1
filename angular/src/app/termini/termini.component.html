@@ -1,0 +1,52 @@
+<div class="row mb-3 mt-2">
+  <div class="col col-sm-3">
+    <label class="pb-2" style="font-weight: 300;">{{'datumPretraga' | translate}}:</label>
+    <input class="w-100 p-2 border-0" type="date" [(ngModel)]="this.filterByDate">
+  </div>
+
+  <div class="col mt-4 pt-2">
+    <button class="btn btn-outline-danger mx-2" (click)="Reset()"><i class="fa-solid fa-ban fa-lg"></i>{{'reset' | translate}}</button> |
+    <button class="btn btn-outline-primary mx-2" (click)="Search()"><i
+        class="fa-brands fa-searchengin fa-lg"></i>{{'pretraga' | translate}}</button>
+  </div>
+</div>
+
+<div *ngIf="termini">
+  <table *ngIf="termini.totalCount>0" class="table table-bordered table-hover bg-light">
+    <thead>
+      <tr>
+        <th>Rb.</th>
+        <th>{{'datumPosjete' | translate}}</th>
+        <th>{{'vrijemePosjete' | translate}}</th>
+        <th>{{'opisPosjete' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of termini.dataItems; let i = index" [attr.data-index]="i">
+        <th>{{i + 1}}</th>
+        <td>{{x.vrijemeOd | date:'dd/MM/yyyy' }}</td>
+        <td>{{x.vrijemeOd | date:'HH:mm a'}} - {{x.vrijemeDo | date:'HH:mm a'}}</td>
+        <td style="width: 200px;">
+          <button class="btn btn-outline-info" (click)="showInfoTermin=true; getTermin(x.terminId)"><i
+              class="fa-solid fa-circle-info fa-lg"></i>{{'dodatniOpis' | translate}}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav *ngIf="termini.totalCount>0">
+    <ul class="pagination justify-content-center pagination-sm col-sm">
+      <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' | translate}}</a></li>
+      <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+        (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+      <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' | translate}}</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="col-sm mt-2">
+    <p style="color: black; font-weight: 600;">{{'totalData' | translate}}: {{termini.totalCount}}</p>
+  </div>
+</div>
+
+<app-termini-info *ngIf="showInfoTermin" (open)="OpenInfo($event)" [termin]="this.termin"></app-termini-info>

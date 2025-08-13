@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs border-1 border-dark bg-light">
+    <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['ljekari']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">{{'ljekari' | translate}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['asistenti']" routerLinkActive="active">{{'asistenti' | translate}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['tehnicari']" routerLinkActive="active">{{'tehnicari' | translate}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['farmaceuti']" routerLinkActive="active">{{'farmaceuti' | translate}}</a>
+    </li>
+</ul>
+<div style="border: none; padding: 10px;">
+    <router-outlet></router-outlet>
+</div>

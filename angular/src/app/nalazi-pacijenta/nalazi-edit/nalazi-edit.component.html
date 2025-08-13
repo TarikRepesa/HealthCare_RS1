@@ -1,0 +1,43 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'uredi' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()">
+          <div style="width: 100%;">
+            <div class="mb-4">
+              <label class="form-label">{{'vrsta' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="Vrsta" formControlName="Vrsta" class="form-control" [(ngModel)]="this.editNalaz.vrsta"
+                  type="text" placeholder="Vrsta" />
+                <mat-error *ngFor="let validation of form_validation_messages.Vrsta">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Vrsta').hasError(validation.type) && (form.get('Vrsta').dirty || form.get('Vrsta').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">{{'prioritet' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="Prioritet" formControlName="Prioritet" class="form-control" [(ngModel)]="this.editNalaz.prioritet"
+                  type="text" placeholder="Prioritet" />
+                <mat-error *ngFor="let validation of form_validation_messages.Prioritet">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Prioritet').hasError(validation.type) && (form.get('Prioritet').dirty || form.get('Prioritet').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

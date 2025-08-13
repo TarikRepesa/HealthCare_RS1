@@ -1,0 +1,49 @@
+<div class="container bg-light" *ngIf="isUserLjekar || isUserAsistent || isUserTehnicar">
+
+  <div class="row p-2">
+    <h4>{{'novaObavijest' | translate}}</h4>
+    <hr>
+  </div>
+
+  <div class="row mt-2 px-5">
+    <div class="col col-sm-2">
+      <label class="fs-5 fst-italic">{{'poruka' | translate}}:</label>
+    </div>
+    <div class="col">
+      <textarea class="w-100 p-2" style="min-height: 250px;" [(ngModel)]="this.poruka"></textarea>
+    </div>
+  </div>
+
+  <div class="row mt-4 pb-4 px-5">
+    <button class="btn btn-primary" style="width: 200px;" (click)="SendNotification()">{{'posalji' | translate}}</button>
+  </div>
+</div>
+
+<div class="container mt-4" *ngIf="data">
+  <div class="row">
+    <h4><i class="fa-solid fa-bell fa-lg"></i>{{'obavijesti' | translate}} ({{total}})</h4>
+    <hr class="mt-3">
+  </div>
+
+  <div class="obavijesti row mt-3 p-2" *ngFor="let x of data">
+
+    <div class="row">
+      <p style="font-weight: 400;">{{'posalo' | translate}}: {{x.ime}} {{x.prezime}} <br>
+        {{x.datumVrijemeSlanja | date:('yyyy-MM-dd HH:mm a')}} </p>
+    </div>
+
+    <div class="row">
+      <p style="font-weight: 500;">{{'sadržajPoruke' | translate}}:</p>
+    </div>
+
+    <div class="row">
+      <p style="font-size: 1.2em; font-family:Arial, Helvetica, sans-serif;">{{x.poruka}}</p>
+    </div>
+
+    <div class="row mt-2" *ngIf="isUserLjekar || isUserAsistent || isUserTehnicar">
+      <button class="btn btn-outline-dark" style="width: 120px;" (click)="RemoveNotification(x.id)"><i
+        class="fa-solid fa-trash-can fa-lg"></i>{{'ukloni' | translate}}</button>
+    </div>
+  </div>
+
+</div>

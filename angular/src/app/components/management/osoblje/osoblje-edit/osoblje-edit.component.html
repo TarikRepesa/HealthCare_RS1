@@ -1,0 +1,74 @@
+<div
+  class="modal fade show"
+  id="exampleModalLive"
+  tabindex="-1"
+  aria-labelledby="exampleModalLiveLabel"
+  aria-modal="true"
+  role="dialog"
+  style="display: block"
+  *ngIf="urediOsoblje!=null && urediOsoblje.prikaz"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{urediOsoblje.name}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="urediOsoblje.prikaz=false"></button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onEditOsoblje()">
+      <div class="modal-body">
+        <div class="row mb-3">
+          <label for="Ime" class="col-sm-4 col-form-label">Ime</label>
+          <div class="col-sm-8">
+          <input id="Ime" formControlName="Ime" class="form-control" type="text" placeholder="Ime" [(ngModel)]="urediOsoblje.ime"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Ime">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Ime').hasError(validation.type) && (form.get('Ime').dirty || form.get('Ime').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="Prezime" class="col-sm-4 col-form-label">Prezime</label>
+          <div class="col-sm-8">
+          <input id="Prezime" formControlName="Prezime" class="form-control" type="text" placeholder="Prezime" [(ngModel)]="urediOsoblje.prezime"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Prezime">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Prezime').hasError(validation.type) && (form.get('Prezime').dirty || form.get('Prezime').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="GodineIskustva" class="col-sm-4 col-form-label">Godine iskustva</label>
+          <div class="col-sm-8">
+          <input id="GodineIskustva" formControlName="GodineIskustva" class="form-control" type="text" placeholder="Godine iskustva" [(ngModel)]="urediOsoblje.godineIskustva"/>
+            <mat-error *ngFor="let validation of form_validation_messages.GodineIskustva">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('GodineIskustva').hasError(validation.type) && (form.get('GodineIskustva').dirty || form.get('GodineIskustva').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="Email" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+          <input id="Email" formControlName="Email" class="form-control" type="text" placeholder="Email" [(ngModel)]="urediOsoblje.email"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Email">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Email').hasError(validation.type) && (form.get('Email').dirty || form.get('Email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="BrojTelefona" class="col-sm-4 col-form-label">Broj telefona</label>
+          <div class="col-sm-8">
+          <input id="BrojTelefona" formControlName="BrojTelefona" class="form-control" type="text" placeholder="Broj telefona" [(ngModel)]="urediOsoblje.brojTelefona"/>
+            <mat-error *ngFor="let validation of form_validation_messages.BrojTelefona">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('BrojTelefona').hasError(validation.type) && (form.get('BrojTelefona').dirty || form.get('BrojTelefona').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="urediOsoblje.prikaz = false">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onEditOsoblje()">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+

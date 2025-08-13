@@ -1,0 +1,107 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'CALENDAR_BUTTON_ADD' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()"> 
+          <div class="col mb-2 p-2">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">{{'datumPosjete' | translate}}:</label>
+            <div class="">
+              <input id="DatumPosjete" formControlName="DatumPosjete" type="date" class="form-control" style="width: 478px;" [(ngModel)]="this.datumPosjete">
+              <mat-error *ngFor="let validation of form_validation_messages.DatumPosjete">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('DatumPosjete').hasError(validation.type) && (form.get('DatumPosjete').dirty || form.get('DatumPosjete').touched)">{{validation.message | translate}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="row p-2">
+            <div class="col mb-2">
+              <label for="colFormLabel" class="col-sm-4 col-form-label">{{'vrijemePosjeteOd' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="VrijemePosjeteOd" formControlName="VrijemePosjeteOd" type="time" class="form-control" [(ngModel)]="this.vrijemePosjeteOd">
+                <mat-error *ngFor="let validation of form_validation_messages.VrijemePosjeteOd">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('VrijemePosjeteOd').hasError(validation.type) && (form.get('VrijemePosjeteOd').dirty || form.get('VrijemePosjeteOd').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="col mb-2 col-sm-1">
+              <p style="color: grey; margin-top: 40px; margin-left: 30px; font-weight: 400; font-size: 1.3em;">|</p>
+            </div>
+
+            <div class="col mb-2">
+              <label for="colFormLabel" class="col-sm-4 col-form-label">{{'vrijemePosjeteDo' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="VrijemePosjeteDo" formControlName="VrijemePosjeteDo" type="time" class="form-control" [(ngModel)]="this.vrijemePosjeteDo">
+                <mat-error *ngFor="let validation of form_validation_messages.VrijemePosjeteDo">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('VrijemePosjeteDo').hasError(validation.type) && (form.get('VrijemePosjeteDo').dirty || form.get('VrijemePosjeteDo').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="col mb-2 p-2">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">{{'vrstaPregleda' | translate}}:</label>
+            <div class="col-sm-12">
+              <input id="VrstaPregleda" formControlName="VrstaPregleda" type="text" class="form-control" placeholder="{{'pregled' | translate}}" [(ngModel)]="this.vrsta_pregleda">
+              <mat-error *ngFor="let validation of form_validation_messages.VrstaPregleda">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('VrstaPregleda').hasError(validation.type) && (form.get('VrstaPregleda').dirty || form.get('VrstaPregleda').touched)">{{validation.message | translate}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col mb-4 p-2">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">{{'prioritet' | translate}}:</label>
+            <div class="col-sm-12">
+              <input id="Prioritet" formControlName="Prioritet" type="text" class="form-control" placeholder="{{'prioritet' | translate}}" [(ngModel)]="this.prioritet">
+              <mat-error *ngFor="let validation of form_validation_messages.Prioritet">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Prioritet').hasError(validation.type) && (form.get('Prioritet').dirty || form.get('Prioritet').touched)">{{validation.message | translate}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="col mb-2 p-2">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">{{'ljekar' | translate}}:</label>
+            <div class="col-sm-12">
+              <select id="Ljekar" formControlName="Ljekar" class="form-control" [(ngModel)]="this.defaultLjekar">
+                <option *ngFor="let x of ljekari" [value]="x.id">{{x.imePrezime}}</option>
+              </select>
+              <mat-error *ngFor="let validation of form_validation_messages.Ljekar">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Ljekar').hasError(validation.type) && (form.get('Ljekar').dirty || form.get('Ljekar').touched)">{{validation.message | translate}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col mb-2 p-2">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">{{'ambulatna' | translate}}:</label>
+            <div class="col-sm-12">
+              <select id="Ambulanta" formControlName="Ambulanta" class="form-control" [(ngModel)]="this.defaultAmbulanta">
+                <option *ngFor="let x of ambulante" [value]="x.id">{{x.opis}}</option>
+              </select>
+              <mat-error *ngFor="let validation of form_validation_messages.Ambulanta">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Ambulanta').hasError(validation.type) && (form.get('Ambulanta').dirty || form.get('Ambulanta').touched)">{{validation.message | translate}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="modal-footer mt-4 p-2">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button *ngIf="isUserPacijent" type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

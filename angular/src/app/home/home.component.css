@@ -1,0 +1,44 @@
+.homePage {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/image_1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    box-shadow: rgba(180, 180, 180, 0.26) 5px 2px 5px 2px;
+    animation: slide 25s infinite;
+}
+
+@keyframes slide {
+    25% {
+        background-image: url(../../assets/image_2.jpg);
+    }
+
+    50% {
+        background-image: url(../../assets/image_3.jpg);
+    }
+
+    75% {
+        background-image: url(../../assets/image_4.jpg);
+    }
+
+    100% {
+        background-image: url(../../assets/image_1.jpg);
+    }
+}
+
+.txtPage {
+    position: absolute;
+    width: 700px;
+    height: auto;
+    background-color: rgba(24, 150, 164, 0.596);
+    padding: 10px;
+    color: whitesmoke;
+    font-weight: bolder;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}

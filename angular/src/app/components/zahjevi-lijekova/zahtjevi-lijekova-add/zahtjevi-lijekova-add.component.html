@@ -1,0 +1,55 @@
+<div class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel"
+  aria-modal="true" role="dialog" style="display: block" *ngIf="addZahtjev!=null && addZahtjev.prikaz">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{ 'ZATRAZI_LIJEKOVE' | translate }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="addZahtjev.prikaz=false"></button>
+      </div>
+      <div class="modal-body" style="width: 100%;">
+        <form [formGroup]="form" (ngSubmit)="onAddLijek()">
+          <div class="row mb-4">
+            <label for="Naziv" class="col-sm-4 col-form-label">{{'naziv' | translate}}</label>
+            <div class="col-sm-8">
+              <input id="Naziv" formControlName="Naziv" class="form-control" type="text" placeholder="{{'naziv' | translate}}"
+                [(ngModel)]="addZahtjev.naziv" />
+              <mat-error *ngFor="let validation of form_validation_messages.Naziv">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Naziv').hasError(validation.type) && (form.get('Naziv').dirty || form.get('Naziv').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <label for="Kolicina" class="col-sm-4 col-form-label">{{'kolicina' | translate}}</label>
+            <div class="col-sm-8">
+              <input id="Kolicina" formControlName="Kolicina" class="form-control" type="text"
+                placeholder="{{'kolicina' | translate}}" [(ngModel)]="addZahtjev.kolicina" />
+              <mat-error *ngFor="let validation of form_validation_messages.Kolicina">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Kolicina').hasError(validation.type) && (form.get('Kolicina').dirty || form.get('Kolicina').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <label for="Apoteka" class="col-sm-4 col-form-label">{{'apoteka' | translate}}</label>
+            <div class="col-sm-8">
+              <select id="Apoteka" formControlName="Apoteka" class="form-control" [(ngModel)]="this.apotekaChosen">
+                <option *ngFor="let x of apoteke" [value]="x.id">{{x.vrsta}}</option>
+              </select>
+              <mat-error *ngFor="let validation of form_validation_messages.Apoteka">
+                <mat-error style="color: red" class="error-message"
+                  *ngIf="form.get('Apoteka').hasError(validation.type) && (form.get('Apoteka').dirty || form.get('Apoteka').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="addZahtjev.prikaz = false">Close</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onAddLijek()">Save
+              changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

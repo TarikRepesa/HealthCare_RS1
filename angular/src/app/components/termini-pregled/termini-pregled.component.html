@@ -1,0 +1,10 @@
+<h5>{{'termini' | translate}}</h5>
+<hr>
+<full-calendar #calendar [options]="calendarOptions" [events]="eventsPromise | async">
+</full-calendar>
+
+<app-termin-add *ngIf="this.showAddTermin && isUserPacijent" (Open_Close_AddModal)="this.OpenCloseAddModal($event)" [datumPosjete]="this.datumPosjete" [vrijemePosjeteOd]="this.vrijemePosjeteOd"></app-termin-add>
+
+<app-termin-detail *ngIf="this.showDetailTermin" (Open_Close_DetailModal)="this.OpenCloseDetailModal($event)" [termin]="this.termin"></app-termin-detail>
+
+<app-confirm-dialog *ngIf="this.showConfirmModal && isUserPacijent" (Open_Close_ConfirmModal)="this.OpenCloseConfirmModal($event)" [message]="this.message" [datumPosjete]="this.datumPosjete" [vrijemePosjeteOd]="this.vrijemePosjeteOd"></app-confirm-dialog>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCare", "HealthCare\HealthCare.csproj", "{B0A73CFB-4B20-4F05-9CC2-70C3679B3D1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{D7A49177-1D4C-497A-A829-2F1351233C52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0A73CFB-4B20-4F05-9CC2-70C3679B3D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A73CFB-4B20-4F05-9CC2-70C3679B3D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A73CFB-4B20-4F05-9CC2-70C3679B3D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A73CFB-4B20-4F05-9CC2-70C3679B3D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7A49177-1D4C-497A-A829-2F1351233C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A49177-1D4C-497A-A829-2F1351233C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A49177-1D4C-497A-A829-2F1351233C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A49177-1D4C-497A-A829-2F1351233C52}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C63AB679-DAEA-4438-9A47-AFDFB58F64EE}
+	EndGlobalSection
+EndGlobal

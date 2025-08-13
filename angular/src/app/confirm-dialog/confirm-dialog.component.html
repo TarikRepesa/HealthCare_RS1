@@ -1,0 +1,17 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>{{message}}</p>
+        <div class="modal-footer m-0 p-0">
+          <button type="button" class="btn btn-primary" (click)="Confirm()">{{'DA' | translate}}</button>
+          <button type="button" class="btn btn-danger" (click)="Close()">{{'NE' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-termin-add *ngIf="this.showAddTermin" (Open_Close_AddModal)="this.OpenCloseAddModal($event)"
+  [datumPosjete]="this.datumPosjete" [vrijemePosjeteOd]="this.vrijemePosjeteOd"></app-termin-add>

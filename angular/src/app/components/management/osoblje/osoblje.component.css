@@ -1,0 +1,35 @@
+.osoblje-glavni {
+  display: flex;
+  flex-wrap: wrap;
+}
+.osoblje {
+  background-color: #36454F;
+  position: relative;
+  flex-basis: calc(25% - 10px);
+  margin: 5px;
+  box-sizing: border-box;
+  font-size: 20pt;
+  color: white;
+}
+.osoblje::before {
+  display: block;
+  padding-top: 100%;
+}
+.osoblje .content {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
+}
+.osoblje-naziv{
+  text-align: center;
+  margin-bottom: 25px;
+}
+.two-buttons{
+  text-align: center;
+}
+input {
+  width: 40%;
+  padding: 12px 20px;
+  margin-left: 5px;
+}

@@ -1,0 +1,16 @@
+﻿@using IdentityServer.Quickstart.Account;
+@model RegisterInputModel
+﻿
+<div class="register-success-page">
+    <div class="page-header">
+        <h1>Registration Success</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                The user has been registered successfully.<a class="nav-link text-blue" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" style="color: blue; font-size: 20px">Login</a>
+            </p>
+        </div>
+    </div>
+</div>

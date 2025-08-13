@@ -1,0 +1,94 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'uredi' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()">
+          <div style="width: 100%;">
+            <div class="mb-4">
+              <label class="form-label">{{'ime' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="Ime" formControlName="Ime" class="form-control" [(ngModel)]="this.ime" type="text" />
+                <mat-error *ngFor="let validation of form_validation_messages.Ime">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Ime').hasError(validation.type) && (form.get('Ime').dirty || form.get('Ime').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">{{'prezime' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="Prezime" formControlName="Prezime" class="form-control" [(ngModel)]="this.prezime"
+                  type="text" />
+                  <mat-error *ngFor="let validation of form_validation_messages.Prezime">
+                    <mat-error style="color: red" class="error-message"
+                      *ngIf="form.get('Prezime').hasError(validation.type) && (form.get('Prezime').dirty || form.get('Prezime').touched)">{{validation.message | translate}}</mat-error>
+                  </mat-error>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">{{'email' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="Email" formControlName="Email" class="form-control" [(ngModel)]="this.email" type="text" />
+                <mat-error *ngFor="let validation of form_validation_messages.Email">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Email').hasError(validation.type) && (form.get('Email').dirty || form.get('Email').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">{{'brojTelefona' | translate}}:</label>
+              <div class="col-sm-12">
+                <input id="BrojTelefona" formControlName="BrojTelefona" class="form-control"
+                  [(ngModel)]="this.brojTelefona" type="text" />
+                  <mat-error *ngFor="let validation of form_validation_messages.BrojTelefona">
+                    <mat-error style="color: red" class="error-message"
+                      *ngIf="form.get('BrojTelefona').hasError(validation.type) && (form.get('BrojTelefona').dirty || form.get('BrojTelefona').touched)">{{validation.message | translate}}</mat-error>
+                  </mat-error>
+              </div>
+            </div>
+
+            <div class="mb-4" *ngIf="this.slika!=null; else showDefaultImage">
+              <label class="form-label">{{'slika' | translate}}:</label>
+              <div class="col-sm-12">
+                <img class="img_1" src="{{get_slika_base64_DB(this.slika)}}" />
+              </div>
+            </div>
+
+            <ng-template #showDefaultImage>
+              <div class="mb-4">
+                <label class="form-label">{{'slika' | translate}}:</label>
+                <div class="col-sm-12">
+                  <img class="img_1" src="../../../assets/person_icon.png" />
+                </div>
+              </div>
+            </ng-template>
+
+            <hr>
+
+            <div class="row mb-4"
+              style="background-color: rgba(211, 211, 211, 0.432); padding-top: 20px; padding-bottom: 20px;">
+              <label class="col-sm-2 form-label">{{'promjeniSliku' | translate}}:</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" accept="image/*" (change)="onFileSelected($event)" />
+                <br>
+                <img class="img_2" src="{{selectedImage}}">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

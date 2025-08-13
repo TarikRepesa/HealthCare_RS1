@@ -1,0 +1,162 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'detaljiTermina' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body" *ngIf="termin">
+
+        <div class="row p-2">
+          <div class="col">
+
+            <div class="col col-sm-10 mt-2">
+              <h5>{{'pacijent' | translate}}</h5>
+              <hr>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'pacijent' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.imePacijenta}} {{termin.prezimePacijenta}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'mjestoRodenja' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.mjestoRodenjaPacijenta}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'datumRodenja' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.datumRodenjaPacijenta | date: 'yyyy/MM/dd'}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'brojTelefona' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.brojTelefonaPacijenta}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'email' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.emailPacijenta}}</p>
+              </div>
+            </div>
+
+            <div class="col col-sm-10 mt-4">
+              <h5>{{'posjeta' | translate}}</h5>
+              <hr>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'datumPosjete' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.pocetakPosjete | date: 'yyyy/MM/dd'}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'posjetaOdDO' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.pocetakPosjete | date: 'HH:mm a'}} - {{termin.krajPosjete | date: 'HH:mm a'}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'opisPosjete' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.vrsta}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="col col-sm-10 mt-2">
+              <h5>{{'ljekar' | translate}}</h5>
+              <hr>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'dodjeljenLjekaru' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.imeLjekara}} {{termin.prezimeLjekara}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'brojTelefona' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.brojTelefonaLjekara}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'email' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.emailLjekara}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">{{'ambulatna' | translate}}:</label>
+              <div class="col-sm">
+                <p>{{termin.nazivAmbulante}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isUserPacijent">
+          <div class="col mt-4 p-2">
+            <h5>{{'pomjeruPosjetu' | translate}}</h5>
+            <hr>
+          </div>
+
+          <div class="col px-2">
+
+            <div class="row mb-4">
+              <label class="col-sm-2">{{'datumPosjete' | translate}}:</label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control" [(ngModel)]="this.datumPosjete" (input)="onInputChange()">
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label class="col-sm-2">{{'pocetakPosjete' | translate}}:</label>
+              <div class="col-sm-3">
+                <input type="time" class="form-control" [(ngModel)]="this.pocetakPosjete" (input)="onInputChange()">
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label class="col-sm-2">{{'krajPosjete' | translate}}:</label>
+              <div class="col-sm-3">
+                <input type="time" class="form-control" [(ngModel)]="this.krajPosjete" (input)="onInputChange()">
+              </div>
+            </div>
+
+            <div class="col pt-2">
+              <button class="btn btn-success" (click)="pomjeriPosjetu()"
+                [disabled]="isButtonDisabled">{{'pomjeruPosjetu'
+                | translate}}</button>
+              <button *ngIf="!isButtonDisabled" class="btn btn-danger" style="margin-left: 20px;"
+                (click)="ponistiPromjene()">{{'otkaziPromjene' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer p-2">
+        <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button> 
+        <button *ngIf="isUserPacijent" type="button" class="btn btn-danger" (click)="OtkaziTermin()">{{'otkaziPosjetu' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

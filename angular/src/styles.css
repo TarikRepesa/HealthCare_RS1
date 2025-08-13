@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0.397);
+}
+
+.fc-show_Weekends-button {
+    background-color: #838996 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.fc-zakaziTermin-button {
+    background-color: #32cd32 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.fc-zakaziTermin-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-show_Weekends-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-toolbar-title {
+    font-size: 1.6em !important;
+    color: rgb(0, 0, 0) !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 500 !important;
+}
+
+.fc-toolbar-title::before {
+    content: "<<" !important;
+    padding-right: 15px !important;
+}
+
+.fc-toolbar-title::after {
+    content: ">>" !important;
+    padding-left: 15px !important;
+}
+
+.fc-col-header-cell-cushion {
+    background-color: #e6e6e600 !important;
+    color: black !important;
+    text-decoration: none !important;
+    font-size: 1.1em !important;
+}
+
+.fc-daygrid-day-number {
+    text-decoration: none !important;
+    color: brown !important;
+}
+
+th .fc-scrollgrid-sync-inner {
+    border-top: none;
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+    background-color: #e6e6e654 !important;
+}
+
+.fc-scroller::-webkit-scrollbar{
+    width: 2px !important;
+    background-color: rgba(128, 128, 128, 0.274) !important;
+}
+
+.fc-daygrid-day-frame {
+    border: 1px solid rgba(128, 128, 128, 0.096) !important;
+    background-color: #e6e6e654 !important;
+
+}
+
+.fc-timegrid-slot-label-cushion {
+    color: black !important;
+    font-weight: 500 !important;
+}
+
+td .fc-timegrid-slot,
+.fc-timegrid-slot-lane {
+    background-color: #e6e6e654 !important;
+    border: 1px solid rgba(128, 128, 128, 0.096) !important;
+}
+
+td .fc-timegrid-slot,
+.fc-timegrid-slot-lane,
+.fc-timegrid-slot-minor {
+    /* border: none !important; */
+    border: 1px solid rgba(128, 128, 128, 0.452) !important;
+    background-color: #e6e6e654 !important;
+}
+
+.fc-view-harness,
+.fc-view-harness-active {
+    border: 1px solid black !important;
+}
+
+.fc-timegrid-slot:hover {
+    cursor: pointer !important;
+}
+
+.fc-timegrid-event-harness,
+.fc-timegrid-event-harness-inset :hover {
+    cursor: pointer !important;
+}
+
+
+.fc-timegrid-slot:hover::before {
+    background-color: #4cbb17 !important;
+}
+
+.fc-timegrid-slot-lane:hover::before {
+    background-color: #4cbb17 !important;
+}
+
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button,
+.fc-timeGridDay-button {
+    background-color: #838996 !important;
+    color: white !important;
+    border: 1px solid white !important;
+    text-transform: capitalize !important;
+}
+
+.fc-dayGridMonth-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-timeGridWeek-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-timeGridDay-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-button-active {
+    background-color: #838996 !important;
+    opacity: .6 !important;
+}
+
+.fc-prev-button,
+.fc-next-button {
+    background-color: #838996 !important;
+    border: none !important;
+}
+
+.fc-prev-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-next-button:hover {
+    opacity: .6 !important;
+}
+
+.fc-today-button:disabled {
+    background-color: #838996 !important;
+    opacity: .6 !important;
+    border: none !important;
+    text-transform: capitalize !important;
+}
+
+.fc-today-button {
+    background-color: #838996 !important;
+    border: none !important;
+    text-transform: capitalize !important;
+}
+
+.fc-today-button:hover {
+    opacity: .6 !important;
+} 
+
+.toast-right-top,
+.error {
+    height: auto !important;
+}
+
+.toast-right-top,
+.success {
+    height: auto !important;
+}
+
+.toast-right-top,
+.info {
+    height: auto !important;
+}
+
+.toast-right-top,
+.warning {
+    height: auto !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

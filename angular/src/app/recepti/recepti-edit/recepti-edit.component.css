@@ -1,0 +1,25 @@
+.modal {
+    background-color: rgba(0, 0, 0, 0.432);
+}
+
+.modal-header {
+    background-color: #00ccff;
+    color: white;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.030);
+    padding: 10px;
+}
+
+.form-control:hover {
+    cursor: pointer;
+    border: 1px solid black;
+    transition: all .3s ease;
+}
+
+.form-label {
+    color: black;
+    font-weight: 500;
+    font-size: 1em;
+}

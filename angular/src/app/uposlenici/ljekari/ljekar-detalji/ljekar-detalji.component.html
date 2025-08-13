@@ -1,0 +1,76 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" *ngIf="employee">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLiveLabel">{{employee.ime}} {{employee.prezime}}</h3>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; width: 100%;">
+
+          <div *ngIf="employee.slika_korisnika==null; else showEmployeeImage" style="width: 40%;">
+            <img src="../../../../assets/doctor_icon.png">
+          </div>
+
+          <ng-template #showEmployeeImage>
+            <div style="width: 40%;">
+              <img src="{{get_slika_base64_DB(employee)}}" style="max-width: 100%">
+            </div>
+          </ng-template>
+
+          <div style="width: 60%; padding-left: 40px;">
+            <h4>{{'osobniPodaci' | translate}}:</h4>
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'ime' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.ime" disabled>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'prezime' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.prezime" disabled>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'email' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.email" style="color: brown;" disabled>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'brojTelefona' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.brojTelefona" style="color: brown;" disabled>
+              </div>
+            </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'specijalizacija' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.specjalizacija" style="color: blue;" disabled>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <label for="colFormLabel" class="col-sm-3 col-form-label">{{'specifikacija' | translate}}:</label>
+              <div class="col-sm-9">
+                <input class="form-control" [(ngModel)]="employee.specifikacija" style="color: blue;" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+      </div>
+    </div>
+  </div>

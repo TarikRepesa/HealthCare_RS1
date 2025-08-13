@@ -1,0 +1,20 @@
+<div class="top-container" style="text-align: center">
+  <input id="pretraga-osoblja" type="text" placeholder="{{'nazivOsoblja' | translate}}" style="float: left" [(ngModel)]="filter"/>
+  <button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-primary btn-lg btn-block" (click)="addOsoblje()">{{'dodajOsoblje' | translate}}<span class="bi bi-trash"></span></button>
+</div>
+<div class="osoblje-glavni">
+  <div class="osoblje" *ngFor="let o of filterOsoblje()">
+    <div class="osoblje-naziv">{{o.ime}} {{o.prezime}}</div>
+    <div style="margin-left: 5px">Email:</div>
+    <div style="margin-left: 5px">{{o.email}}</div>
+    <div style="margin-left: 5px">{{'brojTelefona' | translate}}:</div>
+    <div style="margin-left: 5px">{{o.brojTelefona}}</div>
+    <div class="two-buttons">
+      <button style="margin-bottom: 5px; margin-left: 5px; margin-top: 25px" class="btn btn-danger" (click)="OnRemoveOsoblje(o.id)">Delete<span class="bi bi-trash"></span></button>
+      <button style="margin: 25px 5px 5px 5px" class="btn btn-primary" (click)="edit(o)">Edit<span class="bi bi-pencil-square"></span></button>
+    </div>
+  </div>
+</div>
+
+<app-osoblje-edit [urediOsoblje] = "editOsoblje" ></app-osoblje-edit>
+<app-osoblje-add [addOsoblje] = "newOsoblje" [OdjeljenjeId] = "this.id"></app-osoblje-add>

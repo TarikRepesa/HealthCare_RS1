@@ -1,0 +1,73 @@
+<div class="row m-2 d-flex float-end">
+    <button class="btn" style="background-color: #00ccff; color: white; font-weight: 500;" (click)="this.showAddNalaz=true"><i
+        class="fa-solid fa-plus fa-lg"></i> {{'dodajNalaz' | translate}}</button>
+  </div>
+  
+  <div *ngIf="nalazi">
+    <div class="row mb-3 mt-2">
+      <div class="col col-sm-5">
+        <input [(ngModel)]="filter"
+          style=" background-color: rgb(255, 255, 255); color: black; padding-left: 30px; padding-top: 7px; padding-bottom: 7px;"
+          class="form-control" placeholder="{{'vrsta' | translate}}">
+        <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+             margin-left: 10px;
+             margin-top: -20px;
+             position: relative;
+             z-index: 2;
+             color: gray;"></span>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-danger mx-2" (click)="Reset()"><i class="fa-solid fa-ban fa-lg"></i>{{'reset' | translate}}</button>
+        |
+        <button class="btn btn-outline-primary mx-2" (click)="Search()"><i
+            class="fa-brands fa-searchengin fa-lg"></i>{{'pretraga' | translate}}</button>
+      </div>
+    </div>
+  
+    <table *ngIf="nalazi.totalCount>0" class="table table-bordered table-hover bg-light">
+      <thead>
+        <tr>
+          <th>Rb.</th>
+          <th>{{'vrsta' | translate}}</th>
+          <th>{{'prioritet' | translate}}</th>
+          <th>{{'ljekar' | translate}}</th>
+          <th>{{'specijalizacija' | translate}}</th>
+          <th style="width: 300px; ">{{'' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of nalazi.dataItems; let i = index" [attr.data-index]="i">
+          <th>{{i + 1}}</th>
+          <td>{{x.vrsta}}</td>
+          <td>{{x.prioritet}}</td>
+          <td>{{x.izdaoLjekar}}</td>
+          <td>{{x.specijalizacija_ljekara}}</td>
+          <td style="width: 300px;">
+            <button class="btn btn-outline-secondary" (click)="showEditNalaz=true; Edit(x); nalazId=x.nalazId"><i
+                class="fa-solid fa-pen-to-square fa-lg"></i>{{'uredi' | translate}}</button> |
+            <button class="btn btn-outline-danger" (click)="Delete(x.nalazId)"><i
+                class="fa-solid fa-trash-can fa-lg"></i>{{'obrisi' | translate}}</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <nav *ngIf="nalazi.totalCount>0">
+      <ul class="pagination justify-content-center pagination-sm col-sm">
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' | translate}}</a></li>
+        <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+          (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' | translate}}</a></li>
+      </ul>
+    </nav>
+  
+  
+    <div class="col-sm mt-2">
+      <p style="color: black; font-weight: 600;">{{'totalData' | translate}}: {{nalazi.totalCount}}</p>
+    </div>
+  </div>
+
+<app-nalazi-edit *ngIf="showEditNalaz" (open)="OpenEdit($event)" [editNalaz]="this.editNalaz"
+  [nalazId]="this.nalazId"></app-nalazi-edit>
+
+<app-nalazi-add *ngIf="showAddNalaz" (open)="OpenAdd($event)" [pacijentId]="pacijentId"></app-nalazi-add>

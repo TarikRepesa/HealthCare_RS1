@@ -1,0 +1,19 @@
+<div class="top-container" style="text-align: center;">
+  <input id="Filter" placeholder="Naziv odjeljenja" [(ngModel)]="filter" style=" color: black; border: 1px solid black; float: left">
+  <button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-primary btn-lg btn-block" (click)="addOdjeljenje()">{{'dodajOdjeljenje' | translate}}<span class="bi bi-trash"></span></button>
+</div>
+<div class="odjeljenje-glavni">
+  <div class="odjeljenje" *ngFor="let l of filterOdjeljenje()">
+    <div class="odjeljenje-naziv">{{l.naziv}}</div>
+    <div class="pregled-osoblja-button"><button style="margin-bottom: 5px;" class="btn btn-info" routerLink="/osoblje/{{l.id}}">{{'pregledOsoblja' | translate}}<span class="bi bi-trash"></span></button></div>
+    <div class="odjeljenje-broj-osoblja">{{'brojOsoblja' | translate}}: {{l.brojOsoblja}}</div>
+    <div class="odjeljenje-vrsta">{{'vrsta' | translate}}: {{l.vrsta}}</div>
+    <div class="two-buttons"><button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-danger" (click)="OnRemoveOdjeljenje(l.id)">Delete<span class="bi bi-trash"></span></button>
+    <button style="margin-right: 5px; margin-left: 5px; margin-bottom: 5px;" class="btn btn-primary" (click)="edit(l)">Edit<span class="bi bi-pencil-square"></span></button></div>
+  </div>
+</div>
+
+<app-management-edit [urediOdjeljenje] = "editOdjeljenje"></app-management-edit>
+<app-management-add [addOdjeljenje] = "newOdjeljenje"></app-management-add>
+
+

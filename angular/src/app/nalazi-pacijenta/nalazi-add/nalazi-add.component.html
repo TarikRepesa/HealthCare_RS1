@@ -1,0 +1,66 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'dodajNalaz' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()">
+          <div class="container">
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'vrsta' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="Vrsta" formControlName="Vrsta" type="text" class="form-control" placeholder="{{'vrsta' | translate}}"
+                  [(ngModel)]="vrsta">
+                <mat-error *ngFor="let validation of form_validation_messages.Vrsta">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Vrsta').hasError(validation.type) && (form.get('Vrsta').dirty || form.get('Vrsta').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'prioritet' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="Prioritet" formControlName="Prioritet" type="text" class="form-control" placeholder="{{'prioritet' | translate}}"
+                  [(ngModel)]="prioritet">
+                <mat-error *ngFor="let validation of form_validation_messages.Prioritet">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Prioritet').hasError(validation.type) && (form.get('Prioritet').dirty || form.get('Prioritet').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'ljekar' | translate}}:</label>
+              </div>
+              <div class="col col-sm-6">
+                <select id="Ljekar" formControlName="Ljekar" class="form-select" [(ngModel)]="ljekarId">
+                  <option *ngFor="let x of this.ljekari" [value]="x.id">{{x.imePrezime}}</option>
+                </select>
+                <mat-error *ngFor="let validation of form_validation_messages.Ljekar">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Ljekar').hasError(validation.type) && (form.get('Ljekar').dirty || form.get('Ljekar').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' |
+              translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

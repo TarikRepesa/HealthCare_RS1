@@ -1,0 +1,115 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel"> {{'dodajUputnicu' | translate}}:</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()">
+          <div class="container">
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;" for="Odjeljenje">{{'odjeljenje' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <select id="Odjeljenje" formControlName="Odjeljenje" class="form-control" [(ngModel)]="this.odjeljenje" (change)="odjeljenjeChanged($event)">
+                  <option value="">{{'odaberite' | translate}}</option>
+                  <option *ngFor="let x of odjeljenja" [value]="x.id">{{x.naziv}}</option>
+                </select>
+                <div *ngFor="let validation of form_validation_messages.Odjeljenje">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Odjeljenje').hasError(validation.type) && (form.get('Odjeljenje').dirty || form.get('Odjeljenje').touched)">{{validation.message}}</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;" for="Odsjek">{{'odsjek' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <select id="Odsjek" formControlName="Odsjek" class="form-control" [(ngModel)]="this.odsjek">
+                  <option value="">{{'odaberite' | translate}}</option>
+                  <option *ngFor="let x of odsjeci" [value]="x.id">{{x.naziv}}</option>
+                </select>
+                <div *ngFor="let validation of form_validation_messages.Odsjek">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Odsjek').hasError(validation.type) && (form.get('Odsjek').dirty || form.get('Odsjek').touched)">{{validation.message}}</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'dijagnoza' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="Dijagnoza" formControlName="Dijagnoza" type="text" class="form-control" placeholder="{{'dijagnoza' | translate}}"
+                  [(ngModel)]="dijagnoza">
+                <div *ngFor="let validation of form_validation_messages.Dijagnoza">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Dijagnoza').hasError(validation.type) && (form.get('Dijagnoza').dirty || form.get('Dijagnoza').touched)">{{validation.message | translate}}</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'ljekar' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <select id="Ljekar" formControlName="Ljekar" class="form-select" [(ngModel)]="ljekarId">
+                  <option *ngFor="let x of this.ljekari" [value]="x.id">{{x.imePrezime}}</option>
+                </select>
+                <div *ngFor="let validation of form_validation_messages.Ljekar">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Ljekar').hasError(validation.type) && (form.get('Ljekar').dirty || form.get('Ljekar').touched)">{{validation.message | translate}}</mat-error>
+                </div>
+              </div>
+            </div>
+        
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'primjedba' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="Primjedba" formControlName="Primjedba" type="text" class="form-control" placeholder="{{'primjedba' | translate}}"
+                  [(ngModel)]="primjedba">
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'sifreBolesti' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <mat-form-field style="width: 100%">
+                  <mat-select  formControlName="SifreBolesti" [(ngModel)]="sifreBolestiOdabrane" multiple>
+                    @for (sifraBolesti of sifreBolesti; track sifraBolesti) {
+                      <mat-option [value]="sifraBolesti.id">{{sifraBolesti.sifra}} {{sifraBolesti.naziv}}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+                <div *ngFor="let validation of form_validation_messages.SifreBolesti">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('SifreBolesti').hasError(validation.type) && (form.get('SifreBolesti').dirty || form.get('SifreBolesti').touched)">{{validation.message | translate}}</mat-error>
+                </div>
+              </div>
+            </div>
+
+            
+
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' |
+              translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

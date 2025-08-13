@@ -1,0 +1,92 @@
+<div *ngIf="kartonPacijenta">
+    <h4>{{'karton' | translate}} / {{kartonPacijenta.ime}} {{kartonPacijenta.prezime}}</h4>
+</div>
+<hr>
+<div style="padding-bottom: 10px;">
+    <button class="btn btn-close" routerLink="/pacijenti"></button>
+</div>
+<div *ngIf="kartonPacijenta">
+    <div class="mainPage">
+        <div *ngIf="kartonPacijenta.slika_korisnika==null; else showUserImage">
+            <img class="person" src="../../assets/person_icon.png" width="200" height="200">
+        </div>
+
+        <ng-template #showUserImage>
+            <img class="person" src="{{get_slika_base64_DB(kartonPacijenta)}}" width="200" height="200">
+        </ng-template>
+
+        <div class="info">
+            <div style="width: 35%;">
+                <div class="mb-3 row">
+                    <label class="col-sm-4">{{'ime' | translate}}:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.ime" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4">{{'prezime' | translate}}:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.prezime" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4">{{'datumRodenja' | translate}}:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.datum_rodenja" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4">{{'mjestoRodenja' | translate}}:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.mjesto_rodenja" disabled>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 35%;">
+                <div class="mb-3 row">
+                    <label class="col-sm-4">JMBG:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.zdravstvenaLegitimacija.jmbg" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4">{{'sifraKartona' | translate}}:</label>
+                    <div class="col-sm-5">
+                        <input type="text" [value]="kartonPacijenta.karton.sifra_kartona" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="kontaktInfo">
+                <h5>{{'kontaktInfo' | translate}}:</h5>
+                <br>
+                <p>{{'email' | translate}}: <br> {{kartonPacijenta.email}}</p>
+                <p>{{'brojTelefona' | translate}}: <br> {{kartonPacijenta.brojTelefona}}</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#" [routerLink]="['nalazi']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">{{'nalazi' | translate}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" [routerLink]="['uputnice']" routerLinkActive="active">{{'uputnice' | translate}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" [routerLink]="['recepti']" routerLinkActive="active">{{'recepti' | translate}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" [routerLink]="['termini']" routerLinkActive="active">{{'termini' | translate}}</a>
+        </li>
+    </ul>
+    <div style="border: none; padding: 10px; background-color: rgba(0, 0, 0, 0.050);">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.addRecept {
+    margin-top: 15px;
+    padding: 15px;
+    color: black;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.form-control {
+    background-color: white;
+    color: black;
+}
+
+.form-control:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+button i {
+    margin-right: 10px;
+} 
+
+table, thead, th, tr, td{
+    text-align: center;
+} 

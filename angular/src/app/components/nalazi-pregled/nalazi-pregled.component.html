@@ -1,0 +1,35 @@
+<table *ngIf="nalazi.totalCount>0" class="table table-bordered table-hover bg-light">
+      <thead>
+        <tr>
+          <th>Rb.</th>
+          <th>{{'vrsta' | translate}}</th>
+          <th>{{'prioritet' | translate}}</th>
+          <th>{{'ljekar' | translate}}</th>
+          <th>{{'specijalizacija' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of nalazi.dataItems; let i = index" [attr.data-index]="i">
+          <th>{{i + 1}}</th>
+          <td>{{x.vrsta}}</td>
+          <td>{{x.prioritet}}</td>
+          <td>{{x.izdaoLjekar}}</td>
+          <td>{{x.specijalizacija_ljekara}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav *ngIf="nalazi.totalCount>0">
+      <ul class="pagination justify-content-center pagination-sm col-sm">
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' | translate}}</a></li>
+        <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+          (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' | translate}}</a></li>
+      </ul>
+    </nav>
+    
+    <div class="col-sm mt-2">
+      <p style="color: black; font-weight: 600;">{{'totalData' | translate}}: {{nalazi.totalCount}}</p>
+    </div>
+  
+

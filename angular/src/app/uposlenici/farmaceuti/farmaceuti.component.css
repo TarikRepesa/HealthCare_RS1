@@ -1,0 +1,49 @@
+.employee-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    float: left;
+    padding: 20px;
+  }
+  
+  .employee {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.541);
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+    width: 325px;
+  }
+  
+  .employee:hover {
+    background-color: #F0ECE3;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  
+  .employee img {
+    max-width: 100%;
+    height: 250px;
+    border-radius: 50%;
+  }
+  
+  .employee h2 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .employee p {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: #777;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+  button i {
+    margin-right: 10px;
+  }

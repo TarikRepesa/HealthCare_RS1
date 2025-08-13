@@ -1,0 +1,80 @@
+ <div class="filter">
+    <div class="d-flex justify-content-end">
+      <button *ngIf="isUserLjekar" class="btn btn-primary" style="margin-right: 20px"
+              (click)="addZahtjev()"><i class="fa-solid fa-plus fa-lg"></i> {{'kreirajZahtjev' | translate}}</button>
+    </div>
+    <div class="col-sm-4">
+      <input [(ngModel)]="filterByNaziv"
+             style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+             class="form-control" placeholder="{{'naziv' | translate}}">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="mx-2">
+      <button class="btn btn-danger mx-2" (click)="Reset()"><i class="fa-solid fa-ban fa-lg"></i>Reset</button> |
+      <button class="btn btn-primary mx-2" (click)="Search()"><i
+        class="fa-brands fa-searchengin fa-lg"></i>{{'pretraga' | translate}}</button>
+    </div>
+
+  </div>
+<table class="table table-bordred">
+  <thead>
+  <tr>
+    <th>{{'naziv' | translate}}</th>
+    <th>{{'kolicina' | translate}}</th>
+    <th>{{'apoteka' | translate}}</th>
+    <th>{{'stanje' | translate}}</th>
+    <th>{{'mogucnosti' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let l of zahtjevi.dataItems">
+    <td>{{l.naziv}}</td>
+    <td>{{l.kolicina}}</td>
+    <td>{{l.apoteka.vrsta}}</td>
+    <td>
+      <span class="badge bg-secondary">{{ (l.odobren === null ? 'NA_CEKANJU' : '') | translate }}</span>
+      <span class="badge bg-success">{{ (l.odobren === true ? 'ODOBREN' : '') | translate }}</span>
+      <span class="badge bg-warning">{{ (l.odobren === false ? 'ODBIJEN' : '') | translate }}</span>
+    </td>
+    <td>
+      <button *ngIf="isUserFarmaceut && l.odobren === null" style="margin-right: 5px" class="btn btn-success" (click)="odobri(l.id)">Odobri<span class="bi bi-pencil-square"></span></button> 
+      <button *ngIf="isUserFarmaceut && l.odobren === null" style="margin-right: 5px" class="btn btn-warning" (click)="odbij(l.id)">Odbij<span class="bi bi-pencil-square"></span></button> 
+      <button *ngIf="isUserLjekar && l.odobren === null" style="margin-left: 5px" class="btn btn-danger" (click)="OnRemoveLijek(l.id)">Delete<span class="bi bi-trash"></span></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row px-2">
+  <div class="col-sm mt-4">
+    <p style="color: black; font-weight: 400;">{{'totalData' | translate}}: {{zahtjevi.totalCount}}</p>
+  </div>
+
+  <div class="col-sm mt-4">
+    <div class="row justify-content-end">
+      <p class="col-sm-2" style="margin-right: -55px; color: black; font-weight: 400;">{{'pageSize' | translate}}</p>
+      <div class="col-sm-2 justify-content-start">
+        <select style="width: 100%;" (change)="onTableSizeChange($event)">
+          <option *ngFor="let size of tableSize" [ngValue]="size">{{size}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <ul class="pagination justify-content-center pagination-sm col-sm">
+    <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' | translate}}</a></li>
+    <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+        (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+    <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' | translate}}</a></li>
+  </ul>
+</nav>
+
+<app-zahtjevi-lijekova-add [addZahtjev] = "newZahtjev"></app-zahtjevi-lijekova-add>

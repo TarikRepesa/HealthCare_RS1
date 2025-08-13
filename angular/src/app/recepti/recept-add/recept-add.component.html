@@ -1,0 +1,107 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display: block;">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{'dodajRecept' | translate}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="SaveChanges()">
+          <div class="container">
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'datumIzdavanja' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="DatumIzdavanja" formControlName="DatumIzdavanja" type="date" class="form-control"
+                  [(ngModel)]="datumIzdavanja">
+                <mat-error *ngFor="let validation of form_validation_messages.DatumIzdavanja">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('DatumIzdavanja').hasError(validation.type) && (form.get('DatumIzdavanja').dirty || form.get('DatumIzdavanja').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'vrijemeIzdavanja' | translate}}:</label>
+              </div>
+              <div class="col col-sm-2">
+                <input id="VrijemeIzdavanja" formControlName="VrijemeIzdavanja" type="time" class="form-control"
+                  [(ngModel)]="vrijemeIzdavanja">
+                <mat-error *ngFor="let validation of form_validation_messages.VrijemeIzdavanja">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('VrijemeIzdavanja').hasError(validation.type) && (form.get('VrijemeIzdavanja').dirty || form.get('VrijemeIzdavanja').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'doza' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="Doza" formControlName="Doza" type="text" class="form-control" placeholder="{{'doza' | translate}}"
+                  [(ngModel)]="doza">
+                <mat-error *ngFor="let validation of form_validation_messages.Doza">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Doza').hasError(validation.type) && (form.get('Doza').dirty || form.get('Doza').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'sifraBolesti' | translate}}:</label>
+              </div>
+              <div class="col col-sm-4">
+                <input id="SifraBolesti" formControlName="SifraBolesti" type="text" class="form-control"
+                  placeholder="{{'sifraBolesti' | translate}}" [(ngModel)]="sifraBolesti">
+                <mat-error *ngFor="let validation of form_validation_messages.SifraBolesti">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('SifraBolesti').hasError(validation.type) && (form.get('SifraBolesti').dirty || form.get('SifraBolesti').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'ljekar' | translate}}:</label>
+              </div>
+              <div class="col col-sm-6">
+                <select id="Ljekar" formControlName="Ljekar" class="form-select" [(ngModel)]="ljekarId">
+                  <option *ngFor="let x of this.ljekari" [value]="x.id">{{x.imePrezime}}</option>
+                </select>
+                <mat-error *ngFor="let validation of form_validation_messages.Ljekar">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Ljekar').hasError(validation.type) && (form.get('Ljekar').dirty || form.get('Ljekar').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col col-sm-3">
+                <label style="font-weight: 500;">{{'napomena' | translate}}:</label>
+              </div>
+              <div class="col">
+                <textarea id="Napomena" formControlName="Napomena" type="text" class="form-control"
+                  [(ngModel)]="napomena" placeholder="{{'napomena' | translate}} . . ." style="min-height: 200px;"></textarea>
+                <mat-error *ngFor="let validation of form_validation_messages.Napomena">
+                  <mat-error style="color: red" class="error-message"
+                    *ngIf="form.get('Napomena').hasError(validation.type) && (form.get('Napomena').dirty || form.get('Napomena').touched)">{{validation.message | translate}}</mat-error>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-secondary" (click)="Close()">{{'close' | translate}}</button>
+            <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="SaveChanges()">{{'save' |
+              translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

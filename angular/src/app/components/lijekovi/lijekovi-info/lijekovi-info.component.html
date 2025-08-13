@@ -1,0 +1,43 @@
+<div
+  class="modal fade show"
+  id="exampleModalLive"
+  tabindex="-1"
+  aria-labelledby="exampleModalLiveLabel"
+  aria-modal="true"
+  role="dialog"
+  style="display: block"
+  *ngIf="lijekOpis!=null"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{lijekOpis.name}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="Close()"></button>
+      </div>
+      <div class="modal-body" style="width: 100%;">
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nacin upotrebe</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" [disabled]="true" [(ngModel)]="lijekOpis.nacinUpotrebe" style="min-height: 150px;"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nuspojave</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" [disabled]="true" [(ngModel)]="lijekOpis.nuspojave" style="min-height: 150px;"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Upozorenja</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" [disabled]="true" [(ngModel)]="lijekOpis.upozorenja" style="min-height: 150px;"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="Close()">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

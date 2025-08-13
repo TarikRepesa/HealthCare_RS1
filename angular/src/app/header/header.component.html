@@ -1,0 +1,32 @@
+<div class="header">
+
+  <div class="logo">
+    <img src="../../assets/HealthCareIcon1.png" width="55" height="50">
+    <h2>Health Care</h2>
+  </div>
+
+
+  <div class="user">
+    <h6 *ngIf="isUserAuthenticated"
+      style="text-align: center; font-weight: 600; font-style: italic; padding-right: 10px; padding-top: 5px;">
+      {{'welcome' | translate}}</h6>
+    <h6 *ngIf="isUserAuthenticated && currentUser" style="font-weight: 400; text-align: center; padding-top: 5px;">
+      {{currentUser.ime}} {{currentUser.prezime}}</h6>
+    <div *ngIf="isUserAuthenticated && currentUser" class="user-image">
+      {{currentUser.ime.charAt(0).toUpperCase()}}{{currentUser.prezime.charAt(0).toUpperCase()}}</div>
+
+    <div>
+      <select style="width: 130px; padding: 5px; border: 2px solid rgba(0, 0, 0, 0.377);" (change)="changeLang($event)">
+        <option value="bos" [selected]="lang == 'bos'">{{'bosanski' | translate}}</option>
+        <option value="en" [selected]="lang == 'en'">{{'engleski' | translate}}</option>
+      </select>
+    </div>
+
+    <div class="button">
+      <button *ngIf="!isUserAuthenticated" class="btn btn-primary" style="color:white" (click)="login()">{{'login' |
+        translate}}</button>
+      <button *ngIf="isUserAuthenticated" class="btn btn-outline-dark" style="color:gray" (click)="logout()">{{'logout'
+        | translate}}</button>
+    </div>
+  </div>
+</div>

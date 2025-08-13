@@ -1,0 +1,13 @@
+<h2>Dvostruka autentifikacija</h2>
+
+<form (ngSubmit)="frmSubmit()" method="post">
+  <div class="mb-3 row">
+    <label for="txtVerificationCode" class="col-sm-2 col-form-label">Sigurnosni kod</label>
+    <div class="col-sm-3">
+      <input id="txtVerificationCode" [(ngModel)]="txtVerificationCode" name="verificationCode" type="text"  class="form-control">
+    </div>
+  </div>
+
+  <button class="btn btn-primary">Potvrdi</button>&nbsp;
+  <button class="btn btn-danger" type="button" (click)="ponisti()">Poništi</button>
+</form>

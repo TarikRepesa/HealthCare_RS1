@@ -1,0 +1,44 @@
+.odjeljenje {
+  background-color: #36454F;
+  position: relative;
+  flex-basis: calc(25% - 10px);
+  margin: 5px;
+  box-sizing: border-box;
+  font-size: 20pt;
+  color: white;
+}
+.odjeljenje-glavni {
+  display: flex;
+  flex-wrap: wrap;
+}
+.odjeljenje::before {
+  display: block;
+  padding-top: 100%;
+}
+.odjeljenje .content {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
+}
+.odjeljenje-naziv{
+  text-align: center;
+  margin-bottom: 25px;
+}
+.odjeljenje-broj-osoblja{
+  margin-left: 5px;
+}
+.odjeljenje-vrsta{
+  margin-left: 5px;
+}
+.two-buttons{
+  text-align: center;
+}
+.pregled-osoblja-button{
+  text-align: center;
+}
+input {
+  width: 40%;
+  padding: 12px 20px;
+  margin-left: 5px;
+}

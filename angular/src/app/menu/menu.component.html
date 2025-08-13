@@ -1,0 +1,56 @@
+
+<div *ngIf="isUserAuthenticated && isUserAllowed2FA" class="side-nav">
+  <ul>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="#" routerLink="/home" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-house fa-lg"></i>{{'home' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" routerLink="/doctors" routerLinkActive="active"><i
+          class="fa-solid fa-user-group fa-lg"></i>{{'osoblje' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" routerLink="/contact" routerLinkActive="active"><i
+          class="fa-solid fa-file-contract fa-lg"></i>{{'kontakt' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && (isUserLjekar || isUserAdmin || isUserAsistent)"
+      class="nav-item">
+      <a class="nav-link" href="#" routerLink="/glavna-ploca" routerLinkActive="active"><i
+          class="fa-regular fa-calendar-check fa-lg"></i>{{'glavnaPloca' | translate}}</a>
+    </li>
+    <li
+      *ngIf="isUserAuthenticated && (isUserPacijent || isUserAdmin || isUserLjekar || isUserAsistent)"
+      class="nav-item">
+      <a class="nav-link" href="#" routerLink="/termini-pregled" routerLinkActive="active"><i
+          class="fa-solid fa-calendar-days fa-lg"></i>{{'termini' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && isUserAdmin" class="nav-item">
+      <a class="nav-link" [routerLink]="['/management']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-list-check fa-lg"></i>{{'menadzment' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && (isUserFarmaceut || isUserLjekar || isUserAdmin)" class="nav-item">
+      <a class="nav-link" [routerLink]="['/lijekovi']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-pills fa-lg"></i>{{'lijekovi' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && (isUserFarmaceut || isUserLjekar || isUserAdmin)" class="nav-item">
+      <a class="nav-link" [routerLink]="['/zahtjevi-lijekova']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-pills fa-lg"></i>{{'zahtjeviLijekova' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && (isUserAdmin || isUserLjekar || isUserFarmaceut || isUserAsistent)"
+      class="nav-item">
+      <a class="nav-link" [routerLink]="['/pacijenti']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-hospital-user fa-lg"></i>{{'pacijenti' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAdmin" class="nav-item">
+      <a class="nav-link" [routerLink]="['/privacy']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-lock fa-lg"></i>
+        {{'privacy' | translate}} </a>
+    </li>
+    <li *ngIf="isUserAuthenticated" class="nav-item">
+      <a class="nav-link" href="#" routerLink="/obavijesti" routerLinkActive="active"><i class="fa-solid fa-bell fa-xl"></i>{{'obavijesti' | translate}}</a>
+    </li>
+    <li *ngIf="isUserAuthenticated && isUserPacijent" class="nav-item">
+      <a class="nav-link" [routerLink]="['/nalazi-pregled']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><i class="fa-solid fa-clipboard-list fa-lg"></i>{{'pregledNalaza' | translate}}</a>
+    </li> 
+  </ul>
+</div>

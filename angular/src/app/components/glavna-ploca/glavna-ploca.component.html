@@ -1,0 +1,116 @@
+<div class="container mt-2 border-bottom border-info">
+  <h3 style="color: black; font-weight: 200;">{{'ukupanBrojTermina' | translate}} ({{appointments.length}})</h3>
+</div>
+
+<div class="container">
+  <div class="row mt-3">
+
+    <div class="col-sm p-4 m-3"
+      style="background-color: #3CB371; box-shadow: rgba(0, 0, 0, 0.384) 0px 10px 15px -3px, rgba(0, 0, 0, 0.158) 0px 4px 6px -2px;">
+      <img src="../../../assets/calendar-icon.webp" width="75px" height="75px">
+      <h2>{{todayAppointments}}</h2>
+      <p>{{'terminiZaDanas' | translate}}</p>
+      <div class="row px-2 mt-xl-4">
+        <hr class="col-sm bg-white">
+        <hr class="col-sm">
+      </div>
+    </div>
+
+    <div class="col-sm p-4 m-3"
+      style="background-color: #48D1CC; box-shadow: rgba(0, 0, 0, 0.384) 0px 10px 15px -3px, rgba(0, 0, 0, 0.158) 0px 4px 6px -2px;">
+      <img src="../../../assets/calendar-icon.webp" width="75px" height="75px">
+      <h2>{{tomorrowAppointments}}</h2>
+      <p>{{'terminiZaSutra' | translate}}</p>
+      <div class="row px-2 mt-xl-4">
+        <hr class="col-sm bg-white">
+        <hr class="col-sm">
+      </div>
+    </div>
+
+    <div class="col-sm p-4 m-3"
+      style="background-color:   #CE2029; box-shadow: rgba(0, 0, 0, 0.384) 0px 10px 15px -3px, rgba(0, 0, 0, 0.158) 0px 4px 6px -2px;">
+      <img src="../../../assets/calendar-icon.webp" width="75px" height="75px">
+      <h2>{{weekAppointments}}</h2>
+      <p>{{'terminiUSedmici' | translate}}</p>
+      <div class="row px-2 mt-xl-4">
+        <hr class="col-sm bg-white">
+        <hr class="col-sm bg-dark">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isUserLjekar" class="container mt-4 border-bottom border-info">
+  <h3 style="color: black; font-weight: 200;">{{'terminiZa' | translate}} {{datum | date: 'dd/MM/yyyy'}}</h3>
+</div>
+
+<div *ngIf="isUserLjekar" class="container mt-3">
+
+  <div class="row">
+    <label class="fst-italic">
+      {{'datumPretraga' | translate}}:
+    </label>
+  </div>
+  <div class="row mt-1">
+    <div class="col col-sm-3">
+      <input class="p-1 w-100" type="date" [(ngModel)]="datum">
+    </div>
+    <div class="col">
+      <button class="btn btn-danger" (click)="ReturnToTodaysDate()"><i
+          class="fa-solid fa-arrow-rotate-left fa-lg"></i>{{'danasnjiDatum' | translate}}</button> |
+      <button class="btn btn-primary" (click)="SearchDate()"><i class="fa-brands fa-searchengin fa-lg"></i>{{'pretraga'
+        | translate}}</button>
+    </div>
+  </div>
+
+  <div *ngIf="terminiByLjekar" class="mt-4">
+    <table class="table table-borderless table-hover">
+      <thead class="border-bottom border-dark">
+        <tr>
+          <th>Rb.</th>
+          <th>{{'datumPosjete' | translate}}</th>
+          <th>{{'vrijemePosjete' | translate}}</th>
+          <th>{{'vrstaPosjete' | translate}}</th>
+          <th>{{'imePrezimePacijenta' | translate}}</th>
+          <th>{{'datumRodenja' | translate}}</th>
+          <th>{{'mjestoRodenja' | translate}}</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of terminiByLjekar.dataItems; let i = index" [attr.data-index]="i"
+          class="border-bottom border-light">
+          <td [ngStyle]="Style(x)">{{i + 1}}</td>
+          <td [ngStyle]="Style(x)">{{x.vrijemeOd | date:'dd/MM/yyyy'}}</td>
+          <td [ngStyle]="Style(x)">{{x.vrijemeOd | date:'HH:mm a'}} - {{x.vrijemeDo | date:'HH:mm a'}}</td>
+          <td [ngStyle]="Style(x)">{{x.vrsta}}</td>
+          <td [ngStyle]="Style(x)">{{x.ime_pacijenta}} {{x.prezime_pacijenta}}</td>
+          <td [ngStyle]="Style(x)">{{x.datumRodenja_pacijenta | date:'dd/MM/yyyy'}}</td>
+          <td [ngStyle]="Style(x)">{{x.mjestoRodenja_pacijenta}}</td>
+          <td [ngStyle]="Style(x)" style="font-weight: 600; font-size: 1.1em;">{{todayDate
+            >= x.vrijemeOd && todayDate >= x.vrijemeDo ? 'Zavrsen' : 'Pregled'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav>
+      <ul class="pagination justify-content-center pagination-sm col-sm">
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' |
+            translate}}</a></li>
+        <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+          (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+        <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' |
+            translate}}</a></li>
+      </ul>
+    </nav>
+
+    <div class="row mt-2">
+      <p *ngIf="terminiByLjekar.totalCount>1" style="color: black; font-size: 1.1em; font-weight: 300;">{{'ukupno' |
+        translate}}:
+        {{terminiByLjekar.totalCount}} {{'terminiBoard' | translate}}</p>
+      <p *ngIf="terminiByLjekar.totalCount==1" style="color: black; font-size: 1.1em; font-weight: 300;"> {{'ukupno' |
+        translate}}:
+        {{terminiByLjekar.totalCount}} {{'terminBoard' | translate}}</p>
+    </div>
+  </div>
+</div>

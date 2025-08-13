@@ -1,0 +1,20 @@
+<h2>{{ 'login' | translate }}</h2>
+
+<form (ngSubmit)="frmSubmit()" method="post">
+  <div class="mb-3 row">
+    <label for="txtEmail" class="col-sm-2 col-form-label">{{ 'emailAdresa' | translate }}</label>
+    <div class="col-sm-3">
+      <input id="txtEmail" [(ngModel)]="txtEmail" type="email" name="email" (change)="onEmailChange($event)" class="form-control">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="txtLozinka" class="col-sm-2 col-form-label">{{ 'lozinka' | translate }}</label>
+    <div class="col-sm-3">
+      <input id="txtLozinka" [(ngModel)]="txtLozinka" name="lozinka" class="form-control" type="password">
+    </div>
+  </div>
+
+  <button class="btn btn-primary">{{ 'login' | translate }}</button>&nbsp;
+  <button class="btn btn-success" type="button" (click)="ponovoPosaljiAktivaciju()" *ngIf="posaljiPonovoAktivaciju">Ponovo pošalji email</button>
+</form>

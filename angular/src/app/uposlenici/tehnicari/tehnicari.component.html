@@ -1,0 +1,23 @@
+<div class="col col-sm-4 mt-3 mx-4">
+  <input [(ngModel)]="this.filter" style="color: black; border: 1px solid black; padding-left: 30px;"
+    class="form-control" placeholder="{{'imePrezime' | translate}}">
+  <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+  margin-left: 10px;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  color: gray;"></span>
+</div>
+
+<div class="employee-list" *ngFor="let x of filterData()">
+  <div class="employee">
+    <img *ngIf="x.slika==null" src="../../../assets/doctor_icon.png">
+    <img *ngIf="x.slika!=null" src="{{get_slika_base64_DB(x)}}">
+    <h2>{{x.ime}} {{x.prezime}}</h2>
+    <!-- <p>Specialization: {{x.specijalizacija}}</p> -->
+    <p>{{'email' | translate}}: {{x.email}}</p>
+    <button class="btn btn-outline-info" (click)="showDetails=true; getEmployee(x.id)"><i class="fa-solid fa-arrow-up-right-dots fa-lg"></i>{{'prikaziDetalje' | translate}}</button>
+  </div>
+</div>
+
+<app-tehnicar-detalji *ngIf="showDetails" (open)="OpenDetails($event)" [employee]="this.employee"></app-tehnicar-detalji>

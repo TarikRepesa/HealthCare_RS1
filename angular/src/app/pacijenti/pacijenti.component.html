@@ -1,0 +1,128 @@
+<div *ngIf="pacijenti">
+  <div class="d-flex justify-content-end">
+    <button class="btn" style="background-color: #00ccff; color: white;"
+      (click)="prikaziDodavanjePacijenta=true; this.noviPacijent()"><i
+        class="fa-solid fa-plus fa-lg"></i>{{'dodajPacijenta' | translate}}</button>
+  </div>
+
+  <div class="filter">
+    <div class="col-sm-3">
+      <input [(ngModel)]="filterByNameSurname"
+        style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+        class="form-control" placeholder="{{'imePrezime' | translate}}">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="col-sm-2 mx-3">
+      <input [(ngModel)]="filterByMjestoRodenja"
+        style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+        class="form-control" placeholder="{{'mjestoRodenja' | translate}}">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="col-sm-2">
+      <input [(ngModel)]="filterByJMBG"
+        style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+        class="form-control" placeholder="JMBG">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="mx-3">
+      <button class="btn btn-danger mx-2" (click)="Reset()"><i class="fa-solid fa-ban fa-lg"></i>{{'reset' |
+        translate}}</button> |
+      <button class="btn btn-primary mx-2" (click)="Search()"><i class="fa-brands fa-searchengin fa-lg"></i>{{'pretraga'
+        | translate}}</button>
+    </div>
+
+  </div>
+
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>{{'ime' | translate}}</th>
+        <th>{{'prezime' | translate}}</th>
+        <th>{{'datumRodenja' | translate}}</th>
+        <th>JMBG</th>
+        <th>{{'mjestoRodenja' | translate}}</th>
+        <th>{{'email' | translate}}</th>
+        <th>{{'brojTelefona' | translate}}</th>
+        <th>{{'slika' | translate}}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of pacijenti.dataItems">
+        <td>{{x.ime}}</td>
+        <td>{{x.prezime}}</td>
+        <td>{{x.datumRodenja | date:'dd/MM/yyyy'}}</td>
+        <td>{{x.zdravstvenaLegitimacija.jmbg}}</td>
+        <td>{{x.mjestoRodenja}}</td>
+        <td style="color: blue;">{{x.email}}</td>
+        <td style="color: brown;">{{x.brojTelefona}}</td>
+        <td *ngIf="x.slika!=null"><img src="{{get_slika_base64_DB(x)}}" width="55" height="55"></td>
+        <td *ngIf="x.slika==null"><img src="../../assets/person_icon.png" width="55" height="55"></td>
+        <td>
+          <button class="btn btn-info" routerLink="/karton-pacijenta/{{x.id}}"><i
+              class="fa-solid fa-notes-medical fa-lg"></i>{{'karton' | translate}}</button> |
+          <button class="btn btn-secondary"
+            (click)="this.prikaziEditPacijenta=true; editPacijent(x.id); this.pacijentId=x.id"><i
+              class="fa-solid fa-pen-to-square fa-lg"></i>{{'uredi' | translate}}</button> |
+          <button class="btn btn-danger" (click)="deletePacijent(x.id)"><i
+              class="fa-regular fa-trash-can fa-lg"></i>{{'obrisi' | translate}}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row px-2">
+    <div class="col-sm mt-4">
+      <p style="color: black; font-weight: 400;">{{'totalData' | translate}}: {{pacijenti.totalCount}}</p>
+    </div>
+
+    <div class="col-sm mt-4">
+      <div class="row justify-content-end">
+        <p class="col-sm-3" style="margin-right: -70px; color: black; font-weight: 400;">{{'velicinaStranice' | translate}}:</p>
+        <div class="col-sm-2 justify-content-start">
+          <select style="width: 100%;" (change)="onTableSizeChange($event)">
+            <option *ngFor="let size of tableSize" [ngValue]="size">{{size}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <ul class="pagination justify-content-center pagination-sm col-sm">
+      <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">{{'previous' | translate}}</a></li>
+      <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+        (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+      <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">{{'next' | translate}}</a></li>
+    </ul>
+  </nav>
+</div>
+
+<app-pacijenti-add *ngIf="prikaziDodavanjePacijenta" (otvori)="Open_Add($event)" [ime]="this.ime"
+  [prezime]="this.prezime" [email]="this.email" [brojTelefona]="this.brojTelefona" [datumRodenja]="this.datumRodenja"
+  [mjestoRodenja]="this.mjestoRodenja" [jmbg]="this.jmbg" [datumIzdavanja]="this.datumIzdavanja"
+  [dopunskoOsiguranje]="this.dopunskoOsiguranje" [srodstvoOsiguranika]="this.srodstvoOsiguranika">
+</app-pacijenti-add>
+
+<app-pacijenti-edit *ngIf="prikaziEditPacijenta" (otvori)="Open_Edit($event)" [ime]="this.ime" [prezime]="this.prezime"
+  [email]="this.email" [brojTelefona]="this.brojTelefona" [slika]="this.slika"
+  [pacijentId]="this.pacijentId"></app-pacijenti-edit>

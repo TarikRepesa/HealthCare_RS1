@@ -1,0 +1,10 @@
+td, th{
+  text-align: center;
+}
+.filter {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 25px;
+  padding-top: 10px;
+}
+

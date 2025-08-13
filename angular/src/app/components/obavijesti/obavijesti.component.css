@@ -1,0 +1,16 @@
+.obavijesti {
+    background-color: rgba(220, 220, 220, 0.233);
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.obavijesti :hover{
+    cursor: pointer;
+}
+
+h4 i{
+    margin-right: 15px;
+}
+
+button i{
+    margin-right: 15px;
+}

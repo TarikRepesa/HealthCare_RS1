@@ -1,0 +1,95 @@
+ <div class="filter">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary" style="margin-right: 20px"
+              (click)="addMedication()"><i class="fa-solid fa-plus fa-lg"></i> Dodaj
+        lijek</button>
+    </div>
+    <div class="col-sm-4">
+      <input [(ngModel)]="filterByNaziv"
+             style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+             class="form-control" placeholder="Naziv">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="col-sm-3 mx-4">
+      <input [(ngModel)]="filterByVrsta"
+             style=" background-color: rgb(255, 255, 255); color: black; border: 1px solid black; padding-left: 30px;"
+             class="form-control" placeholder="Vrsta">
+      <span class="fa-solid fa-magnifying-glass fa-sm" style="float: left;
+      margin-left: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+      color: gray;"></span>
+    </div>
+
+    <div class="mx-2">
+      <button class="btn btn-danger mx-2" (click)="Reset()"><i class="fa-solid fa-ban fa-lg"></i>Reset</button> |
+      <button class="btn btn-primary mx-2" (click)="Search()"><i
+        class="fa-brands fa-searchengin fa-lg"></i>Pretraga</button>
+        <button class="btn btn-primary" style="margin-right: 20px"  (click)="IdiNaZahtjeve()"
+              ><i class="fa-solid fa-pills fa-lg"></i> {{'zahtjevi' | translate}}</button>
+    </div>
+
+  </div>
+<table class="table table-bordred">
+  <thead>
+  <tr>
+    <th>Naziv</th>
+    <th>Vrsta</th>
+    <th>Kolicina</th>
+    <th>Cijena</th>
+    <th>Dodatni opis</th>
+    <th>Mogućnosti</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let l of lijekovi.dataItems">
+    <td>{{l.naziv}}</td>
+    <td>{{l.vrsta}}</td>
+    <td>{{l.kolicinaNaStanju}}</td>
+    <td>{{l.cijena}}</td>
+    <td><button style="margin-right: 5px" class="btn btn-primary" (click)="moreInfo(l)">Info<span class="bi bi-pencil-square"></span></button></td>
+    <td>
+      <button style="margin-right: 5px" class="btn btn-primary" (click)="edit(l)">Edit<span class="bi bi-pencil-square"></span></button>
+      <button style="margin-left: 5px" class="btn btn-danger" (click)="OnRemoveLijek(l.id)">Delete<span class="bi bi-trash"></span></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row px-2">
+  <div class="col-sm mt-4">
+    <p style="color: black; font-weight: 400;">Total data: {{lijekovi.totalCount}}</p>
+  </div>
+
+  <div class="col-sm mt-4">
+    <div class="row justify-content-end">
+      <p class="col-sm-2" style="margin-right: -55px; color: black; font-weight: 400;">Page size:</p>
+      <div class="col-sm-2 justify-content-start">
+        <select style="width: 100%;" (change)="onTableSizeChange($event)">
+          <option *ngFor="let size of tableSize" [ngValue]="size">{{size}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <ul class="pagination justify-content-center pagination-sm col-sm">
+    <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToPrev()">Previous</a></li>
+    <li *ngFor="let p of pageNumbersArray()" class="page-item" [ngClass]="p == currentPage?'active':''"
+        (click)="goToPage(p)"><button class="page-link">{{p}}</button></li>
+    <li class="page-item"><a class="page-link" style="cursor: pointer" (click)="goToNext()">Next</a></li>
+  </ul>
+</nav>
+
+<app-lijekovi-edit [urediLijek] = "editLijek"></app-lijekovi-edit>
+
+<app-lijekovi-add [addLijek] = "newLijek"></app-lijekovi-add>
+ <app-lijekovi-info *ngIf="this.showInfoLijekovi" (Open_Close_InfoModal)="this.OpenCloseInfoModal($event)" [lijekOpis] = "this.infoLijek"></app-lijekovi-info>

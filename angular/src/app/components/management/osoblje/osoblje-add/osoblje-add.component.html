@@ -1,0 +1,151 @@
+<div
+  class="modal fade show"
+  id="exampleModalLive"
+  tabindex="-1"
+  aria-labelledby="exampleModalLiveLabel"
+  aria-modal="true"
+  role="dialog"
+  style="display: block"
+  *ngIf="addOsoblje!=null && addOsoblje.prikaz"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{addOsoblje.name}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="addOsoblje.prikaz=false"></button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onAddOsoblje()" style="overflow-y: auto">
+      <div class="modal-body">
+        <div class="row mb-3">
+          <label for="Ime" class="col-sm-4 col-form-label">{{'ime' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="Ime" formControlName="Ime" class="form-control" type="text" placeholder="{{'ime' | translate}}" [(ngModel)]="addOsoblje.Ime"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Ime">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Ime').hasError(validation.type) && (form.get('Ime').dirty || form.get('Ime').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="Prezime" class="col-sm-4 col-form-label">{{'prezime' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="Prezime" formControlName="Prezime" class="form-control" type="text" placeholder="{{'prezime' | translate}}" [(ngModel)]="addOsoblje.prezime"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Prezime">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Prezime').hasError(validation.type) && (form.get('Prezime').dirty || form.get('Prezime').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="Email" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+          <input id="Email" formControlName="Email" class="form-control" type="text" placeholder="Email" [(ngModel)]="addOsoblje.email"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Email">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Email').hasError(validation.type) && (form.get('Email').dirty || form.get('Email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="BrojTelefona" class="col-sm-4 col-form-label">{{'brojTelefona' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="BrojTelefona" formControlName="BrojTelefona" class="form-control" type="text" placeholder="{{'brojTelefona' | translate}}" [(ngModel)]="addOsoblje.brojTelefona"/>
+            <mat-error *ngFor="let validation of form_validation_messages.BrojTelefona">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('BrojTelefona').hasError(validation.type) && (form.get('BrojTelefona').dirty || form.get('BrojTelefona').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="GodineIskustva" class="col-sm-4 col-form-label">{{'godineIskustva' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="GodineIskustva" formControlName="GodineIskustva" class="form-control" type="number" placeholder="{{'godineIskustva' | translate}}" [(ngModel)]="addOsoblje.godineIskustva"/>
+            <mat-error *ngFor="let validation of form_validation_messages.GodineIskustva">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('GodineIskustva').hasError(validation.type) && (form.get('GodineIskustva').dirty || form.get('GodineIskustva').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="Slika" class="col-sm-4 col-form-label">{{'odaberiteSliku' | translate}}</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="file" accept="image/*" (change)="onFileSelected($event)" />
+          </div>
+          <div class="col-sm-4">
+            <img style="max-width: 150px; max-height: 200px" src="{{selectedImage}}">
+          </div>
+        </div>    
+        <div class="row mb-3">
+          <label for="Uloga" class="col-sm-4 col-form-label">{{'uloga' | translate}}</label>
+          <div class="col-sm-8">
+            <select id="Uloga" formControlName="Uloga" class="form-control" [(ngModel)]="addOsoblje.uloga">
+              <option *ngFor="let x of uloge" [value]="x.naziv">{{x.naziv}}</option>
+            </select>
+            <mat-error *ngFor="let validation of form_validation_messages.Uloga">
+              <mat-error style="color: red" class="error-message"
+                *ngIf="form.get('Uloga').hasError(validation.type) && (form.get('Uloga').dirty || form.get('Uloga').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="['Ljekar', 'Tehnicar', 'Asistent'].includes(this.addOsoblje.uloga)">
+          <label for="Specijalizacija" class="col-sm-4 col-form-label">{{'specijalizacija' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="Specijalizacija" formControlName="Specijalizacija" class="form-control" type="text" placeholder="{{'specijalizacija' | translate}}" [(ngModel)]="addOsoblje.specijalizacija"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Specijalizacija">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Specijalizacija').hasError(validation.type) && (form.get('Specijalizacija').dirty || form.get('Specijalizacija').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="this.addOsoblje.uloga === 'Ljekar'">
+          <label for="Specifikacija" class="col-sm-4 col-form-label">{{'specifikacija' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="Specifikacija" formControlName="Specifikacija" class="form-control" type="text" placeholder="{{'specifikacija' | translate}}" [(ngModel)]="addOsoblje.specifikacija"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Specifikacija">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Specifikacija').hasError(validation.type) && (form.get('Specifikacija').dirty || form.get('Specifikacija').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="this.addOsoblje.uloga === 'Ljekar'">
+          <label for="Sifra" class="col-sm-4 col-form-label">{{'sifra' | translate}}</label>
+          <div class="col-sm-8">
+          <input id="Sifra" formControlName="Sifra" class="form-control" type="text" placeholder="{{'sifra' | translate}}" [(ngModel)]="addOsoblje.sifra"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Sifra">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Sifra').hasError(validation.type) && (form.get('Sifra').dirty || form.get('Sifra').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="['Tehnicar','Asistent'].includes(this.addOsoblje.uloga)">
+          <label for="Kvalifikacija" class="col-sm-4 col-form-label">{{'kvalifikacija' |  translate}}</label>
+          <div class="col-sm-8">
+          <input id="Kvalifikacija" formControlName="Kvalifikacija" class="form-control" type="text" placeholder="{{'kvalifikacija' |  translate}}" [(ngModel)]="addOsoblje.kvalifikacija"/>
+            <mat-error *ngFor="let validation of form_validation_messages.Kvalifikacija">
+              <mat-error style="color: red" class="error-message" *ngIf="form.get('Kvalifikacija').hasError(validation.type) && (form.get('Kvalifikacija').dirty || form.get('Kvalifikacija').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="this.addOsoblje.uloga === 'Farmaceut'">
+          <label for="ApotekaId" class="col-sm-4 col-form-label">{{'apoteka' | translate}}</label>
+          <div class="col-sm-8">
+            <select id="ApotekaId" formControlName="ApotekaId" class="form-control" [(ngModel)]="addOsoblje.apotekaId">
+              <option *ngFor="let x of apoteke" [value]="x.id">{{x.vrsta}}</option>
+            </select>
+            <mat-error *ngFor="let validation of form_validation_messages.ApotekaId">
+              <mat-error style="color: red" class="error-message"
+                *ngIf="form.get('ApotekaId').hasError(validation.type) && (form.get('ApotekaId').dirty || form.get('ApotekaId').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <input id="Enable2FA" formControlName="Enable2FA" type="checkbox" [(ngModel)]="addOsoblje.enable2FA"/>&nbsp;
+        <label for="Enable2FA" class="col-sm-4 col-form-label">Dvofaktorska autentifikacija (2FA)</label>
+        <button type="button" class="btn btn-secondary" (click)="ocistiPodatke()">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onAddOsoblje()">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+

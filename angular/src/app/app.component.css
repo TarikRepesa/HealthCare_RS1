@@ -1,0 +1,35 @@
+.container-fluid {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+
+.main-container {
+    display: flex;
+}
+
+.main {
+    height: calc(100vh - 70px);
+    padding: 30px;
+    background-color: white;
+    width: 100%;
+    /*width: calc(100% - 280px);*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.main::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
